@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.EditText;
 import edu.vt.cs.cs5254.dreamcatcher.R;
 import edu.vt.cs.cs5254.dreamcatcher.model.Dream;
+import edu.vt.cs.cs5254.dreamcatcher.model.DreamEntry;
 
 import java.util.UUID;
 
@@ -22,8 +23,21 @@ public class DreamActivity extends SingleFragmentActivity implements DreamFragme
         return intent;
     }
 
+    // not used, implemented in DreaListActivity for tablets.
     @Override
     public void onDreamUpdated(Dream dream) {}
+
+    // add logic here to do something when an entry is clicked, this will be in DreamFragment
+    @Override
+    public void onEntrySelected(DreamEntry entry) {
+        // placeholder
+        new AlertDialog.Builder(this)
+                .setTitle("This is a Place Holder")
+                .setMessage("Placeholder")
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok, null)
+                .create().show();
+    }
 
     @Override
     protected Fragment createFragment() {

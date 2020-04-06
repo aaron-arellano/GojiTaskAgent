@@ -33,7 +33,7 @@ public class DreamListFragment extends Fragment {
     private Callbacks mCallbacks;
 
     public interface Callbacks {
-        public void onDreamSelected(Dream dream);
+        void onDreamSelected(Dream dream);
     }
 
 
@@ -92,6 +92,7 @@ public class DreamListFragment extends Fragment {
                         .newIntent(getActivity(), dream.getId());
                 startActivity(intent);*/
                 updateUI();
+                // goes to new dream activity once it is created
                 mCallbacks.onDreamSelected(dream);
                 return true;
             default:

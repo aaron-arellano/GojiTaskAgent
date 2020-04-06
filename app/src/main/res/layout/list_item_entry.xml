@@ -13,7 +13,6 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_rectangle"
-        android:enabled="false"
         android:text="Button"
         android:textAlignment="textStart"
         android:textStyle="bold"

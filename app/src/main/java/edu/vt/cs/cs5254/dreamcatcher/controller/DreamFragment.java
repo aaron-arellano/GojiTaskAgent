@@ -48,6 +48,10 @@ import edu.vt.cs.cs5254.dreamcatcher.view.EntryAdapter;
 
 import static edu.vt.cs.cs5254.dreamcatcher.model.DreamEntryKind.REVEALED;
 
+/* This class acts as the android fragment for the contents of a dream, this means entries and other
+ * entities within a dream. You cannot update entries here, but they are created here.
+ * @Aaron
+ */
 public class DreamFragment extends Fragment {
 
     //view field
@@ -82,6 +86,7 @@ public class DreamFragment extends Fragment {
      */
     public interface Callbacks {
         void onDreamUpdated(Dream dream);
+        void onEntrySelected(DreamEntry entry);
     }
 
     //called whenever the activity needs to create a new fragment
@@ -136,6 +141,7 @@ public class DreamFragment extends Fragment {
             }
         });
 
+        // set the listener on the Realized check box
         mRealizedCheckBox = view.findViewById(R.id.dream_realized);
         mRealizedCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
@@ -150,6 +156,7 @@ public class DreamFragment extends Fragment {
             refreshView();
         });
 
+        // set the listener on the deferred box
         mDeferredCheckBox = view.findViewById(R.id.dream_deferred);
         mDeferredCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
@@ -165,7 +172,7 @@ public class DreamFragment extends Fragment {
         });
 
 
-        //mFloatButton.setText(mCrime.getDate().toString());
+        // add a listener to the '+' button
         mAddCommentFAB = view.findViewById(R.id.myFAB);
         mAddCommentFAB.setOnClickListener(
                 v -> {
@@ -217,11 +224,16 @@ public class DreamFragment extends Fragment {
         }
     }
 
+    // update a dream
     private void updateDream() {
         DreamLab.getInstance(getActivity()).updateDream(mDream);
         DreamEntryLab.getInstance(getActivity()).updateDreamEntries(mDream);
+        // IMPORTANT, this method is only called for tablets
         mCallbacks.onDreamUpdated(mDream);
     }
+
+    // not used, unless needed for a tablet
+    private void updateEntry() { }
 
     private void refreshView() {
         if (mDream.getTitle() != null) {
@@ -385,7 +397,7 @@ public class DreamFragment extends Fragment {
     }
 
 
-    //project4
+    // logic to update a photo
     private void updatePhotoView() {
         if (mPhotoFile == null || !mPhotoFile.exists()) {
             mPhotoView.setImageDrawable(null);

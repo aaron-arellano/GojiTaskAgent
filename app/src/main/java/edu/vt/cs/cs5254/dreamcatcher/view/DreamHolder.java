@@ -3,6 +3,7 @@ package edu.vt.cs.cs5254.dreamcatcher.view;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +32,10 @@ public class DreamHolder extends RecyclerView.ViewHolder implements View.OnClick
 
     public DreamHolder(LayoutInflater inflater, ViewGroup parent) {
         super(inflater.inflate(R.layout.list_item_dream, parent, false));
+        // sets listeners to each dream in the recycler view
         itemView.setOnClickListener(this);
         mTitleTextView = itemView.findViewById(R.id.dream_title);
         mDateTextView = itemView.findViewById(R.id.dream_date);
-        //don't like this but it is needed for tablet callback
-        //DreamListFragment.getCallback().onDreamSelected(mDream);
     }
 
     public void bind(Dream dream) {
@@ -57,12 +57,12 @@ public class DreamHolder extends RecyclerView.ViewHolder implements View.OnClick
 
     }
 
+    // method for clicking a dream
     @Override
     public void onClick(View view) {
         Context context = view.getContext();
         DreamListFragment.Callbacks callbacks = (DreamListFragment.Callbacks) context;
+        // this callback gives the functionality for an action to occur on the list of dreams
         callbacks.onDreamSelected(mDream);
-        /*Intent intent = DreamActivity.newIntent(context, mDream.getId());
-        context.startActivity(intent);*/
     }
 }

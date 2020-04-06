@@ -1,5 +1,6 @@
 package edu.vt.cs.cs5254.dreamcatcher.view;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
@@ -15,10 +16,10 @@ import android.widget.Button;
 import java.text.DateFormat;
 
 import edu.vt.cs.cs5254.dreamcatcher.R;
-import edu.vt.cs.cs5254.dreamcatcher.model.Dream;
+import edu.vt.cs.cs5254.dreamcatcher.controller.DreamFragment; //used for entry action
 import edu.vt.cs.cs5254.dreamcatcher.model.DreamEntry;
 
-public class EntryHolder extends RecyclerView.ViewHolder {
+public class EntryHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     private DreamEntry mEntry;
     private Button mButton;
@@ -30,7 +31,10 @@ public class EntryHolder extends RecyclerView.ViewHolder {
 
     public EntryHolder(LayoutInflater inflater, ViewGroup parent) {
         super(inflater.inflate(R.layout.list_item_entry, parent, false));
+        // set the button to an entry button view item
         mButton = itemView.findViewById(R.id.entry_button);
+        // set a listener on the entry buttons
+        mButton.setOnClickListener(this);
     }
 
     public void bind(DreamEntry entry) {
@@ -102,6 +106,15 @@ public class EntryHolder extends RecyclerView.ViewHolder {
         button.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         button.setAllCaps(false);
         button.setTextColor(Color.BLACK);
+    }
+
+    // method for clicking a dream
+    @Override
+    public void onClick(View view) {
+        Log.v("Entry OnClick()","THIS DREAM WAS CLICKED");
+        Context context = view.getContext();
+        DreamFragment.Callbacks callbacks = (DreamFragment.Callbacks) context;
+        callbacks.onEntrySelected(mEntry);
     }
 
 }

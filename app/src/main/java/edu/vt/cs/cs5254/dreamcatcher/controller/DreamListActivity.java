@@ -8,9 +8,12 @@ import java.util.UUID;
 
 import edu.vt.cs.cs5254.dreamcatcher.R;
 import edu.vt.cs.cs5254.dreamcatcher.model.Dream;
+import edu.vt.cs.cs5254.dreamcatcher.model.DreamEntry;
 
 /**
- * Created by Aaron on 2/13/2018.
+ * Created by Aaron on 2/13/2018.  This is the Activity that displays everything in the main menu
+ * of the application. Implements callbacks for asynchronous calls of the Dram and DreamList
+ * fragments. DreamListFragment callbacks only implemented in this concrete class for tablets.
  */
 
 public class DreamListActivity extends SingleFragmentActivity implements DreamFragment.Callbacks, DreamListFragment.Callbacks{
@@ -26,7 +29,7 @@ public class DreamListActivity extends SingleFragmentActivity implements DreamFr
         return R.layout.activity_masterdetail;
     }
 
-    //called in DreamListFragment
+    // called in DreamListFragment, this creates the dream activity for the dream to pop up.
     public void onDreamSelected(Dream dream){
         //phone
         if (findViewById(R.id.detail_fragment_container) == null) {
@@ -41,7 +44,7 @@ public class DreamListActivity extends SingleFragmentActivity implements DreamFr
         }
     }
 
-    //tablet
+    //tablet, method called in this activity because tablet has both fragments in a single pane
     @Override
     public void onDreamUpdated(Dream dream) {
         DreamListFragment listFragment = (DreamListFragment)
@@ -49,4 +52,6 @@ public class DreamListActivity extends SingleFragmentActivity implements DreamFr
                         .findFragmentById(R.id.fragment_container);
         listFragment.updateUI();
     }
+    // not used
+    public void onEntrySelected(DreamEntry entry) {}
 }
