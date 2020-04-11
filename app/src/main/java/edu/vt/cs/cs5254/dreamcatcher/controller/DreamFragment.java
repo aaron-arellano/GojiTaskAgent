@@ -38,6 +38,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import edu.vt.cs.cs5254.dreamcatcher.R;
 import edu.vt.cs.cs5254.dreamcatcher.model.Dream;
@@ -179,6 +181,7 @@ public class DreamFragment extends Fragment {
                     FragmentManager manager =
                             DreamFragment.this.getFragmentManager();
                     DialogPickerFragment dialog = new DialogPickerFragment();
+                    // callback for onActivityResult, second arg is resultCode
                     dialog.setTargetFragment(
                             DreamFragment.this, REQUEST_COMMENT);
                     dialog.show(manager, DIALOG_COMMENT);
@@ -204,12 +207,24 @@ public class DreamFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode != Activity.RESULT_OK) { return;}
-        //handle getting the text from the dialog
+        // handle getting the text from the dialog, need to add logic for updating a comment
         if (requestCode == REQUEST_COMMENT) {
             String comment =
                     (String) intent.getSerializableExtra(DialogPickerFragment.EXTRA_TEXT);
-            //update with a new comment
-            mDream.addComment(comment);
+            //update with a new comment, check if comment contains a UUID
+            String regex = "\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}";
+            Pattern pairRegex = Pattern.compile(regex);
+            Matcher matcher = pairRegex.matcher(comment);
+            boolean isUpdate = false;
+            while (matcher.find()) {
+                String uuid = matcher.group(0);
+                mDream.updateEntryComment(comment.replaceAll(regex, ""), uuid);
+                isUpdate = true;
+                break;
+            }
+            if (!isUpdate) {
+                mDream.addComment(comment);
+            }
             updateDream();
             refreshEntryButtons();
         } //handle other dialogs here

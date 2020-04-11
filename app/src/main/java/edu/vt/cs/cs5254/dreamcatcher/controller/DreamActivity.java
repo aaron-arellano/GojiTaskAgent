@@ -1,9 +1,11 @@
 package edu.vt.cs.cs5254.dreamcatcher.controller;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.widget.EditText;
 import edu.vt.cs.cs5254.dreamcatcher.R;
@@ -12,6 +14,9 @@ import edu.vt.cs.cs5254.dreamcatcher.model.DreamEntry;
 
 import java.util.UUID;
 
+/** Te Dream Activity is the higher level shell that contains the fragments for a Dream
+ *
+ */
 public class DreamActivity extends SingleFragmentActivity implements DreamFragment.Callbacks{
 
     private static final String EXTRA_DREAM_ID =
@@ -27,16 +32,24 @@ public class DreamActivity extends SingleFragmentActivity implements DreamFragme
     @Override
     public void onDreamUpdated(Dream dream) {}
 
-    // add logic here to do something when an entry is clicked, this will be in DreamFragment
+    // add logic here for a dream entry to be edited, this will be in DreamFragment
     @Override
     public void onEntrySelected(DreamEntry entry) {
-        // placeholder
-        new AlertDialog.Builder(this)
-                .setTitle("This is a Place Holder")
-                .setMessage("Placeholder")
-                .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(android.R.string.ok, null)
-                .create().show();
+        // get the current DreamFragment and call the DialogFragment from it to update entry text
+        DreamFragment dreamFragment = (DreamFragment)
+                getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment_container);
+        FragmentManager manager =
+                dreamFragment.getFragmentManager();
+        DialogPickerFragment dialog = new DialogPickerFragment();
+        // create a bundle to send to the dialog picker fragment to track entry
+        Bundle args = new Bundle();
+        args.putString("entryID", entry.getDreamEntryID().toString());
+        dialog.setArguments(args);
+        // // // // // // // // // // // // // // // // // // // // // // // //
+        dialog.setTargetFragment(
+                dreamFragment, 0);
+        dialog.show(manager, "DialogComment");
     }
 
     @Override

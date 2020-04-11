@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import java.text.DateFormat;
 import edu.vt.cs.cs5254.dreamcatcher.R;
 import edu.vt.cs.cs5254.dreamcatcher.controller.DreamFragment; //used for entry action
 import edu.vt.cs.cs5254.dreamcatcher.model.DreamEntry;
+import edu.vt.cs.cs5254.dreamcatcher.model.DreamEntryKind;
 
 public class EntryHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -111,10 +111,12 @@ public class EntryHolder extends RecyclerView.ViewHolder implements View.OnClick
     // method for clicking a dream
     @Override
     public void onClick(View view) {
-        Log.v("Entry OnClick()","THIS DREAM WAS CLICKED");
         Context context = view.getContext();
         DreamFragment.Callbacks callbacks = (DreamFragment.Callbacks) context;
-        callbacks.onEntrySelected(mEntry);
+        // add logic here for only comment buttons to be clicked
+        if (mEntry.getKind() == DreamEntryKind.COMMENT) {
+            callbacks.onEntrySelected(mEntry);
+        }
     }
 
 }

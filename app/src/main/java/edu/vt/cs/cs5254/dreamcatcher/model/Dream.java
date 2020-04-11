@@ -1,10 +1,14 @@
 package edu.vt.cs.cs5254.dreamcatcher.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Dream {
 
@@ -85,6 +89,21 @@ public class Dream {
     public void addDreamDeferred() {
         DreamEntry entry = new DreamEntry("Dream Deferred", new Date(), DreamEntryKind.DEFERRED);
         mDreamEntries.add(entry);
+    }
+
+    // method to update dream entry comments
+    public void updateEntryComment(String comment, String uuid) {
+        int pos = 0;
+        for (DreamEntry entry : mDreamEntries) {
+            if (entry.getDreamEntryID().toString().equals(uuid)) {
+                break;
+            }
+            pos++;
+        }
+        // update the entry in the array, logic in place for DB already
+        DreamEntry entry = mDreamEntries.get(pos);
+        entry.setText(comment);
+        mDreamEntries.set(pos, entry);
     }
 
     // Consider consolidating further into a method

@@ -38,6 +38,7 @@ public class DreamBaseHelper extends SQLiteOpenHelper {
                 DreamEntryTable.Cols.TEXT + " text, " +
                 DreamEntryTable.Cols.DATE + " integer, " +
                 DreamEntryTable.Cols.KIND + " text, " +
+                DreamEntryTable.Cols.ENTRYID + " text not null, " +
                 DreamEntryTable.Cols.UUID + " text not null, " +
                 "foreign key (" + DreamEntryTable.Cols.UUID + ") references " +
                 DreamTable.NAME + "(" + DreamTable.Cols.UUID + "))"

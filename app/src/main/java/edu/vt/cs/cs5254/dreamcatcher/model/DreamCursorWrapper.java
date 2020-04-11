@@ -9,7 +9,7 @@ import java.util.UUID;
 import edu.vt.cs.cs5254.dreamcatcher.database.DreamDbSchema.*;
 
 /**
- * Created by Aaron on 3/7/2018.
+ * Created by Aaron on 3/7/2018. This class creates a cursor that tracks dreams in the SQLite DB.
  */
 
 public class DreamCursorWrapper extends CursorWrapper {

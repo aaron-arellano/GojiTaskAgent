@@ -27,7 +27,11 @@ public class DreamEntryCursorWrapper extends CursorWrapper {
         long date = getLong(getColumnIndex(DreamEntryTable.Cols.DATE));
         String kind = getString(getColumnIndex(DreamEntryTable.Cols.KIND));
         DreamEntryKind k = DreamEntryKind.valueOf(kind);
-        DreamEntry entry = new DreamEntry(text, new Date(date), k);
+        String uuidString = getString(getColumnIndex(DreamEntryTable.Cols.ENTRYID));
+        DreamEntry entry = new DreamEntry(UUID.fromString(uuidString));
+        entry.setText(text);
+        entry.setDate(new Date(date));
+        entry.setKind(k);
         return entry;
     }
 

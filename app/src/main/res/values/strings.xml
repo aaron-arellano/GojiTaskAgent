@@ -11,7 +11,7 @@
     <string name="share">Share Dream</string>
     <string name="show_subtitle">Show Subtitle</string>
     <string name="hide_subtitle">Hide Subtitle</string>
-    <string name="picker_title">Add Comment:</string>
+    <string name="picker_title">Comment:</string>
     <string name="picker_extra">Alert!</string>
     <string name="add_comment">Enter a  new comment.</string>
     <string name="extra_credit_dialogue">Please enter a title for your dream!</string>

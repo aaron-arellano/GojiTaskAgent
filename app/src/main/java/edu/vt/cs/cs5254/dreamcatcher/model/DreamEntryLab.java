@@ -38,6 +38,7 @@ public class DreamEntryLab {
         values.put(DreamEntryTable.Cols.TEXT, entry.getText());
         values.put(DreamEntryTable.Cols.DATE, entry.getDate().getTime());
         values.put(DreamEntryTable.Cols.KIND, entry.getKind().name());
+        values.put(DreamEntryTable.Cols.ENTRYID, entry.getDreamEntryID().toString());
         values.put(DreamEntryTable.Cols.UUID, dream.getId().toString());
         return values;
     }
@@ -57,7 +58,7 @@ public class DreamEntryLab {
         //delete all entries for this dream in the db
         mDatabase.delete(DreamEntryTable.NAME,
                 DreamEntryTable.Cols.UUID + " = ?",
-                new String[] { uuidString });
+                new String[] { uuidString }); // is stored as a String in DB
         //iterate through entries entry Dream obj
         //add them to the db one at a time
         for (DreamEntry entry: dream.getDreamEntries()) {

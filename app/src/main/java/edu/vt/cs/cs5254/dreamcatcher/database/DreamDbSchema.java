@@ -24,6 +24,7 @@ public class DreamDbSchema {
             public static final String TEXT = "entry_text";
             public static final String DATE = "entry_date";
             public static final String KIND = "entry_kind";
+            public static final String ENTRYID = "entry_uuid";
             public static final String UUID = "dream_uuid";
         }
     }
