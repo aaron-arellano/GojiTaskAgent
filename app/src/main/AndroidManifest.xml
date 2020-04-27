@@ -24,7 +24,7 @@
             android:parentActivityName=".controller.DreamListActivity">
         </activity>
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="edu.vt.cs.cs5254.dreamcatcher.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
