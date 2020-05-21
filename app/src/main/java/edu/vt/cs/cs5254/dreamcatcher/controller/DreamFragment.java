@@ -37,6 +37,7 @@ import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -229,7 +230,7 @@ public class DreamFragment extends Fragment {
             refreshEntryButtons();
         } //handle other dialogs here
         else if (requestCode == REQUEST_PHOTO) {
-            Uri uri = FileProvider.getUriForFile(getActivity(),
+            Uri uri = FileProvider.getUriForFile(Objects.requireNonNull(getActivity()),
                     "edu.vt.cs.cs5254.dreamcatcher.fileprovider",
                     mPhotoFile);
             getActivity().revokeUriPermission(uri,
@@ -280,7 +281,7 @@ public class DreamFragment extends Fragment {
 
     //tablet
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mCallbacks = (Callbacks) context;
     }
@@ -308,7 +309,7 @@ public class DreamFragment extends Fragment {
             case android.R.id.home:
                 String titleString = mTitleField.getText().toString();
                 if (titleString.equals("")) {
-                    new AlertDialog.Builder(getActivity())
+                    new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
                             .setTitle(R.string.picker_extra)
                             .setMessage(R.string.extra_credit_dialogue)
                             .setNegativeButton(android.R.string.cancel, null)
@@ -331,7 +332,7 @@ public class DreamFragment extends Fragment {
             case R.id.camera:
                 //new camera implementation
                 // a package manager know which activities can take a photo
-                PackageManager packageManager = getActivity().getPackageManager();
+                PackageManager packageManager = Objects.requireNonNull(getActivity()).getPackageManager();
                 // create the implicit intent for taking a photo
                 final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 // see if a photo taking activity even exists
@@ -418,7 +419,7 @@ public class DreamFragment extends Fragment {
             mPhotoView.setImageDrawable(null);
         } else {
             Bitmap bitmap = PictureUtils.getScaledBitmap(
-                    mPhotoFile.getPath(), getActivity());
+                    mPhotoFile.getPath(), Objects.requireNonNull(getActivity()));
             mPhotoView.setImageBitmap(bitmap);
         }
     }

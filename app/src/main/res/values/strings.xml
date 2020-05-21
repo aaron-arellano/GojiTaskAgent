@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DreamCatcher</string>
+    <string name="app_name">Goji Task</string>
     <string name="dream_title_label">My Dream</string>
     <string name="dream_title_hint">Enter a title for a dream</string>
     <string name="dream_details_label">Dream Journey</string>

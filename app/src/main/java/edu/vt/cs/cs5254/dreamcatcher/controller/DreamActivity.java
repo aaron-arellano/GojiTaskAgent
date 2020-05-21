@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AlertDialog;
+
+import android.util.Log;
 import android.widget.EditText;
 import edu.vt.cs.cs5254.dreamcatcher.R;
 import edu.vt.cs.cs5254.dreamcatcher.model.Dream;
@@ -42,7 +44,7 @@ public class DreamActivity extends SingleFragmentActivity implements DreamFragme
                 getSupportFragmentManager()
                     .findFragmentById(R.id.fragment_container);
         FragmentManager manager =
-                dreamFragment.getFragmentManager();
+                dreamFragment != null ? dreamFragment.getFragmentManager() : null;
         DialogPickerFragment dialog = new DialogPickerFragment();
         // create a bundle to send to the dialog picker fragment to track entry
         Bundle args = new Bundle();
@@ -51,7 +53,12 @@ public class DreamActivity extends SingleFragmentActivity implements DreamFragme
         // // // // // // // // // // // // // // // // // // // // // // // //
         dialog.setTargetFragment(
                 dreamFragment, 0);
-        dialog.show(manager, "DialogComment");
+        try {
+            dialog.show(manager, "DialogComment");
+        }
+        catch (NullPointerException npe) {
+            Log.e("NullFragmentManager", "The Fragment Manager returned null: " + npe.toString());
+        }
     }
 
     @Override

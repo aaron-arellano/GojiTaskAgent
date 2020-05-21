@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import java.io.File;
+import java.util.Objects;
 import java.util.UUID;
 import edu.vt.cs.cs5254.dreamcatcher.R;
 import edu.vt.cs.cs5254.dreamcatcher.model.Dream;
@@ -45,7 +46,7 @@ public class ZoomPhotoFragment extends DialogFragment {
         mPhotoView = v.findViewById(R.id.image_zoom);
         updatePhotoView();
         //style is needed to make screen big android.R.style.Theme_Black_NoTitleBar_Fullscreen
-        return new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
                 .setView(v)
                 .setTitle(R.string.picture_zoom)
                 .setPositiveButton(
@@ -60,7 +61,7 @@ public class ZoomPhotoFragment extends DialogFragment {
             mPhotoView.setImageDrawable(null);
         } else {
             Bitmap bitmap = PictureUtils.getScaledBitmap(
-                    mPhotoFile.getPath(), getActivity());
+                    mPhotoFile.getPath(), Objects.requireNonNull(getActivity()));
             mPhotoView.setImageBitmap(bitmap);
         }
     }
