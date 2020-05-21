@@ -25,4 +25,5 @@
     <string name="picture_zoom">Dream Photo</string>
     <string name="notRealDef">the dream is neither realized or deferred</string>
     <string name="take_photo">take photo</string>
+    <string name="zoomDescription">Image shown in Zoom</string>
 </resources>

@@ -3,6 +3,8 @@ package edu.vt.cs.cs5254.dreamcatcher.controller;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.appcompat.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -31,6 +33,7 @@ public class ZoomPhotoFragment extends DialogFragment {
         return zoom;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = LayoutInflater.from(getActivity())
@@ -51,7 +54,7 @@ public class ZoomPhotoFragment extends DialogFragment {
                 .create();
     }
 
-    //project4
+    // update the photo on the dialog given to user
     private void updatePhotoView() {
         if (mPhotoFile == null || !mPhotoFile.exists()) {
             mPhotoView.setImageDrawable(null);

@@ -6,7 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 
 /**
- * Created by Aaron on 4/1/2018.
+ * This class outputs the correct sized image of teh dream when the user clicks on it. Image
+ *  dimensions are scaled here to fit new dialog which shows the image.
  */
 
 public class PictureUtils {
@@ -18,7 +19,7 @@ public class PictureUtils {
         return getScaledBitmap(path, size.x, size.y);
     }
 
-    public static Bitmap getScaledBitmap(String path, int destWidth, int destHeight) {
+    private static Bitmap getScaledBitmap(String path, int destWidth, int destHeight) {
         // Read in the dimensions of the image on disk
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -30,8 +31,7 @@ public class PictureUtils {
         if (srcHeight > destHeight || srcWidth > destWidth) {
             float heightScale = srcHeight / destHeight;
             float widthScale = srcWidth / destWidth;
-            inSampleSize = Math.round(heightScale > widthScale ? heightScale :
-                    widthScale);
+            inSampleSize = Math.round(Math.max(heightScale, widthScale));
         }
         options = new BitmapFactory.Options();
         options.inSampleSize = inSampleSize;

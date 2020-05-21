@@ -6,9 +6,13 @@
 
     <ImageView
         android:id="@+id/image_zoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_share"/>
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#2B302B"
+        android:contentDescription="@string/zoomDescription"
+        android:gravity="center"
+        android:src="@drawable/ic_share" />
 
 
 </LinearLayout>
