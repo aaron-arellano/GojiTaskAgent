@@ -14,7 +14,7 @@ import com.vt.taskagent.model.TaskEntry;
 import java.util.UUID;
 
 /** The Task Activity is secondary level activity or shell that contains the necessary fragments
- *  for a task. This activity contains the phot, task entries and task title the user sees in the
+ *  for a task. This activity contains the photo, task entries and task title the user sees in the
  *  app.
  *
  *  @author Aaron Arellano
