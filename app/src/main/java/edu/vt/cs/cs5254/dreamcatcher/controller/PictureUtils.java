@@ -66,7 +66,7 @@ public class PictureUtils {
         ExifInterface ei = new ExifInterface(photoPath);
         int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
                 ExifInterface.ORIENTATION_UNDEFINED);
-    Log.v("VerboseBipmap","In the rotate method:    " + orientation);
+
         Bitmap rotatedBitmap;
         switch (orientation) {
             case ExifInterface.ORIENTATION_ROTATE_90:
