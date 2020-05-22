@@ -3,11 +3,18 @@ package edu.vt.cs.cs5254.dreamcatcher.controller;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Point;
+import androidx.exifinterface.media.ExifInterface;
+import android.util.Log;
 
-/**
- * This class outputs the correct sized image of teh dream when the user clicks on it. Image
+import java.io.IOException;
+
+/** This class outputs the correct sized image of the dream when the user clicks on it. Image
  *  dimensions are scaled here to fit new dialog which shows the image.
+ *
+ * @author Aaron Arellano
+ * @version 2019.05.21
  */
 
 public class PictureUtils {
@@ -35,7 +42,61 @@ public class PictureUtils {
         }
         options = new BitmapFactory.Options();
         options.inSampleSize = inSampleSize;
+
         // Read in and create final bitmap
-        return BitmapFactory.decodeFile(path, options);
+        Bitmap tempBipmap = BitmapFactory.decodeFile(path, options);
+
+        // rotate the image
+        try {
+            tempBipmap = getRotateImage(path, tempBipmap);
+        }
+        catch (IOException ioe) {
+            Log.e("BipmapIO","The image file was not found with exception: " + ioe.toString());
+        }
+        return tempBipmap;
+    }
+
+    /**  Method gets a photo and appropriately rotates it based on EI setting in photo meta.
+     *
+     * @throws IOException if the image is not found at the path provided
+     * @param bitmap the photo in serializable form
+     * @param photoPath the path to the photo
+     */
+    private static Bitmap getRotateImage(String photoPath, Bitmap bitmap) throws IOException {
+        ExifInterface ei = new ExifInterface(photoPath);
+        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_UNDEFINED);
+    Log.v("VerboseBipmap","In the rotate method:    " + orientation);
+        Bitmap rotatedBitmap;
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                rotatedBitmap = rotateImage(bitmap, 90);
+                break;
+
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                rotatedBitmap = rotateImage(bitmap, 180);
+                break;
+
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                rotatedBitmap = rotateImage(bitmap, 270);
+                break;
+
+            case ExifInterface.ORIENTATION_NORMAL:
+            default:
+                rotatedBitmap = bitmap;
+        }
+        return rotatedBitmap;
+    }
+
+    /**  Method gets a photo and appropriately rotates it based on EI setting in photo meta.
+     *
+     *  @param source serializable form of the photo
+     *  @param angle angle of the photo to rotate
+     */
+    private static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true);
     }
 }
