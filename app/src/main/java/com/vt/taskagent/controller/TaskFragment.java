@@ -308,7 +308,6 @@ public class TaskFragment extends Fragment {
                     new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
                             .setTitle(R.string.picker_extra)
                             .setMessage(R.string.extra_credit_dialogue)
-                            .setNegativeButton(android.R.string.cancel, null)
                             .setPositiveButton(android.R.string.ok, null)
                             .create().show();
                     return true;
