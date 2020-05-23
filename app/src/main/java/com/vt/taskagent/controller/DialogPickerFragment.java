@@ -46,15 +46,27 @@ public class DialogPickerFragment extends DialogFragment {
                 .setPositiveButton(
                         android.R.string.ok,
                         (dialog, which) ->
-                        { sendResult(Activity.RESULT_OK, mEditText.getText().toString()+ finalArg); })
+                        {
+                            if (mEditText.getText().toString().isEmpty()) {
+                                new AlertDialog.Builder((getActivity()))
+                                        .setTitle(R.string.picker_extra)
+                                        .setMessage(R.string.comment_error)
+                                        .setPositiveButton(android.R.string.ok, null)
+                                        .create().show();
+                            }
+                            else {
+                                sendResult(Activity.RESULT_OK, mEditText.getText().toString() + finalArg);
+                            }; })
                 .setNegativeButton(
                         android.R.string.cancel,
                         (dialog, which) -> { })
                 .create();
-        }
+    }
+
      // send the result of the text entry back to the calling fragment
     private void sendResult(int resultCode, String comment) {
-        if (getTargetFragment() == null) { return; }
+        // confirm with Java API fragment exists
+        if (getTargetFragment() == null) return;
         Intent intent = new Intent();
         intent.putExtra(EXTRA_TEXT, comment);
         getTargetFragment()

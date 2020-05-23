@@ -3,7 +3,7 @@
     <string name="task_title_label">My Task</string>
     <string name="task_title_hint">Enter a title for a task</string>
     <string name="task_details_label">Task Entries</string>
-    <string name="task_realized_label">Realized</string>
+    <string name="task_realized_label">Completed</string>
     <string name="task_deferred_label">Deferred</string>
     <string name="task_title">Task Title</string>
     <string name="task_date">Task Date</string>
@@ -15,6 +15,7 @@
     <string name="picker_extra">Alert!</string>
     <string name="add_comment">Enter a  new comment.</string>
     <string name="extra_credit_dialogue">Please enter a title for your task!</string>
+    <string name="comment_error">Please enter comment to submit!!</string>
     <string name="realizedOrDeferred">realizedOR</string>
     <string name="task_report_realized">the task was realized on</string>
     <string name="task_report_deferred">the task was deferred on</string>

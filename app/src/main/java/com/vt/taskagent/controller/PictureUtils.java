@@ -7,14 +7,13 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import androidx.exifinterface.media.ExifInterface;
 import android.util.Log;
-
 import java.io.IOException;
 
 /** This class outputs the correct sized image of the task when the user clicks on it. Image
  *  dimensions are scaled here to fit new dialog which shows the image.
  *
  * @author Aaron Arellano
- * @version 2019.05.21
+ * @version 2020.05.22
  */
 
 public class PictureUtils {
