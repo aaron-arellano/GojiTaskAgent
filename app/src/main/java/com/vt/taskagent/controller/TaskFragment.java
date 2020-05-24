@@ -305,8 +305,10 @@ public class TaskFragment extends Fragment {
             case android.R.id.home:
                 String titleString = mTitleField.getText().toString();
                 if (titleString.equals("")) {
+                    View alertView = LayoutInflater.from(getActivity())
+                            .inflate(R.layout.dialog_alert, null);
                     new AlertDialog.Builder(Objects.requireNonNull(getActivity()))
-                            .setTitle(R.string.picker_extra)
+                            .setCustomTitle(alertView)
                             .setMessage(R.string.extra_credit_dialogue)
                             .setPositiveButton(android.R.string.ok, null)
                             .create().show();

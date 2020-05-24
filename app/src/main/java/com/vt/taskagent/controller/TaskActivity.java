@@ -7,6 +7,7 @@ import android.content.Intent;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import com.vt.taskagent.R;
 import com.vt.taskagent.model.Task;
@@ -66,15 +67,20 @@ public class TaskActivity extends SingleFragmentActivity implements TaskFragment
         return TaskFragment.newInstance(taskId);
     }
 
+    /** The onBackPressed is the back button commmon to your android device, this button exists at
+     *  the activity level, not to be confused with the back arrow on the top of the app which is
+     *  at the fragment level.
+     *
+     */
     @Override
     public void onBackPressed() {
         EditText title = findViewById(R.id.task_title_hint);
         String titleString = title.getText().toString();
         if (titleString.equals("")) {
+            View alertView = getLayoutInflater().inflate(R.layout.dialog_alert, null);
             new AlertDialog.Builder(this)
-                    .setTitle(R.string.picker_extra)
+                    .setCustomTitle(alertView)
                     .setMessage(R.string.extra_credit_dialogue)
-                    .setNegativeButton(android.R.string.cancel, null)
                     .setPositiveButton(android.R.string.ok, null)
                     .create().show();
         } else { super.onBackPressed(); }

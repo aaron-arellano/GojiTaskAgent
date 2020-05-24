@@ -42,14 +42,15 @@ public class DialogPickerFragment extends DialogFragment {
         // create the dialog box for entry
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
-                .setTitle(R.string.picker_title)
                 .setPositiveButton(
                         android.R.string.ok,
                         (dialog, which) ->
                         {
                             if (mEditText.getText().toString().isEmpty()) {
+                                View alertView = LayoutInflater.from(getActivity())
+                                        .inflate(R.layout.dialog_alert, null);
                                 new AlertDialog.Builder((getActivity()))
-                                        .setTitle(R.string.picker_extra)
+                                        .setCustomTitle(alertView)
                                         .setMessage(R.string.comment_error)
                                         .setPositiveButton(android.R.string.ok, null)
                                         .create().show();
