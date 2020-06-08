@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Expanded layout for a tablet or larger screen phone -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id = "@+id/activity_twopane"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E3F1FB"
     android:divider = "?android:attr/dividerHorizontal"
     android:showDividers = "middle">
-
 
     <FrameLayout
         android:id = "@+id/fragment_container"
