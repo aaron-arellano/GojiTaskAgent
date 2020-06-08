@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- Main fragment view for landscape mode -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="5dp"
-    android:layout_marginStart="5dp">
+    android:layout_marginEnd="1dp"
+    android:layout_marginStart="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="parent"
+        android:background="#D8ECFB"
+        android:layout_marginTop="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_marginTop="5dp">
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
 
             <TextView
                 android:id="@+id/task_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
                 android:text="@string/task_title"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -35,6 +42,7 @@
                 android:id="@+id/task_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="12sp"
                 android:text="@string/task_date" />
 
         </LinearLayout>
@@ -48,12 +56,12 @@
                 android:id="@+id/imageView"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="10dp"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:contentDescription="@string/realizedOrDeferred"
+                android:orientation="vertical"
                 app:srcCompat="@drawable/sun" />
         </LinearLayout>
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
