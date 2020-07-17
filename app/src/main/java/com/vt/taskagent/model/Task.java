@@ -136,7 +136,6 @@ public class Task {
         mTaskEntries = taskEntries;
     }
 
-    //project4
     public String getPhotoFilename() {
         return "IMG_" + getId().toString() + ".jpg";
     }

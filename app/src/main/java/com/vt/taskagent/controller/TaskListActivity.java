@@ -21,7 +21,6 @@ public class TaskListActivity extends SingleFragmentActivity implements TaskFrag
         return new TaskListFragment();
     }
 
-    //project 4 tablet
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_masterdetail;
