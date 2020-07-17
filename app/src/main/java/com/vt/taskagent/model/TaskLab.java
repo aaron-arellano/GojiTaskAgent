@@ -100,6 +100,14 @@ public class TaskLab {
                 new String[] { uuidString });
     }
 
+    // Added to enable swipe and delete tasks from database
+    public void deleteTask(Task task) {
+        String uuidString = task.getId().toString();
+        mDatabase.delete(TaskTable.NAME,
+                TaskTable.Cols.UUID + " = ?",
+                new String[] { uuidString });
+    }
+
     //private Cursor queryTasks(String whereClause, String[] whereArgs) {
     private TaskCursorWrapper queryTasks(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(

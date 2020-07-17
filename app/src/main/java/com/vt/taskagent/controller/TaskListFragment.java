@@ -2,7 +2,10 @@ package com.vt.taskagent.controller;
 
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,7 +38,6 @@ public class TaskListFragment extends Fragment {
         void onTaskSelected(Task task);
     }
 
-
     //called to let the FragmentManager know that TaskListFragment needs to receive menu callbacks
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class TaskListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_task_list, container, false);
         mTaskRecyclerView = view.findViewById(R.id.task_recycler_view);
         mTaskRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        // call the ItemTouchHelper and attach to recycler view
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mTaskRecyclerView);
         updateUI();
         return view;
     }
@@ -109,4 +113,23 @@ public class TaskListFragment extends Fragment {
             mTaskAdapter.notifyDataSetChanged();
         }
     }
+
+    // Add support for swipe to delete in main fragment, done through simple callback for
+    // ItemTouchHelper which was provided by the android library
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        // not used
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        // Override onSwiped to delete the view from the SQLite database
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            Task task = mTaskAdapter.getTaskFromAdapter(viewHolder.getAdapterPosition());
+            TaskLab.getInstance(getActivity()).deleteTask(task);
+            mTaskAdapter.notifyDataSetChanged();
+            updateUI();
+        }
+    };
 }
