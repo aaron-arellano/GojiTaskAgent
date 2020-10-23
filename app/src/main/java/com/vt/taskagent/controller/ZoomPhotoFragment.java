@@ -16,6 +16,7 @@ import java.util.UUID;
 import com.vt.taskagent.R;
 import com.vt.taskagent.model.Task;
 import com.vt.taskagent.model.TaskLab;
+import com.vt.taskagent.utils.PictureUtils;
 
 /**
  * Created by Aaron on 4/1/2018.
