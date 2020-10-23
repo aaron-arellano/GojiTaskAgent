@@ -52,7 +52,7 @@ public class TaskListFragment extends Fragment {
         mTaskRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         updateUI();
         // call the ItemTouchHelper and attach to recycler view
-        ItemTouchHelper.Callback taskItemTouchHelper = new TaskItemTouchHelper(mTaskAdapter);
+        ItemTouchHelper.Callback taskItemTouchHelper = new TaskItemTouchHelper(mTaskAdapter, getContext());
         new ItemTouchHelper(taskItemTouchHelper).attachToRecyclerView(mTaskRecyclerView);
         return view;
     }
