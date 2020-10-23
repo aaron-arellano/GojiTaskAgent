@@ -34,7 +34,8 @@
                 android:layout_height="80dp"
                 android:background="@android:color/black"
                 android:cropToPadding="true"
-                android:scaleType="centerInside" />
+                android:scaleType="centerInside"
+                android:contentDescription="@string/task_image"/>
 
         </LinearLayout>
 
