@@ -6,6 +6,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
+/** Definition of the task itself. Holds all the necessary properties which are stored and retrieved
+ *  from the sqlite DB
+ *
+ * @author Aaron
+ * @version 20201022
+ */
 public class Task {
 
     private UUID mId;
