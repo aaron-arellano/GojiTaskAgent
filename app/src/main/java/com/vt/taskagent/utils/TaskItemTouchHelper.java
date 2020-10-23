@@ -1,8 +1,5 @@
 package com.vt.taskagent.utils;
 
-import android.util.Log;
-
-import com.vt.taskagent.controller.TaskListFragment;
 import com.vt.taskagent.view.TaskAdapter;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -18,9 +15,6 @@ public class TaskItemTouchHelper extends ItemTouchHelper.Callback {
     private TaskAdapter mTaskAdapter;
 
     public TaskItemTouchHelper(TaskAdapter mAdapter) {
-        if(mAdapter == null) {
-            Log.v("mAdapter", "is null");
-        }
         this.mTaskAdapter = mAdapter;
     }
 
@@ -38,10 +32,6 @@ public class TaskItemTouchHelper extends ItemTouchHelper.Callback {
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-        Log.v("ERROR Pos", Integer.toString(viewHolder.getAdapterPosition()));
-        if (mTaskAdapter == null) {
-            Log.v("ERROR Null", "this guy is null");
-        }
         mTaskAdapter.onItemDismiss(viewHolder.getAdapterPosition());
     }
 }
