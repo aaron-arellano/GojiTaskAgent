@@ -42,6 +42,7 @@ import com.vt.taskagent.model.Task;
 import com.vt.taskagent.model.TaskEntry;
 import com.vt.taskagent.model.TaskEntryLab;
 import com.vt.taskagent.model.TaskLab;
+import com.vt.taskagent.utils.PictureUtils;
 import com.vt.taskagent.view.EntryAdapter;
 
 /** This class acts as the android fragment for the contents of a task, this means entries and other
