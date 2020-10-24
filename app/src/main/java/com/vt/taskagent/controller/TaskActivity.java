@@ -67,7 +67,7 @@ public class TaskActivity extends SingleFragmentActivity implements TaskFragment
         return TaskFragment.newInstance(taskId);
     }
 
-    /** The onBackPressed is the back button commmon to your android device, this button exists at
+    /** The onBackPressed is the back button common to your android device, this button exists at
      *  the activity level, not to be confused with the back arrow on the top of the app which is
      *  at the fragment level.
      *
