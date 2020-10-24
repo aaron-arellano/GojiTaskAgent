@@ -43,6 +43,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Ite
         return mTasks.get(pos);
     }
 
+    public List<Task> getTasks() { return mTasks; }
+
     public void setTasks(List<Task> tasks) {
         mTasks = tasks;
     }
@@ -61,6 +63,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskHolder> implements Ite
         TaskLab.getInstance(mContext).deleteTask(task);
         List<Task> tasks = TaskLab.getInstance(mContext).getTasks();
         this.setTasks(tasks);
-        this.notifyDataSetChanged();
+        this.notifyItemRemoved(position);
     }
 }

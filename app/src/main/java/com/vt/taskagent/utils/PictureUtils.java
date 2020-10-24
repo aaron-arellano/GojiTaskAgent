@@ -1,5 +1,6 @@
 package com.vt.taskagent.utils;
 
+import java.io.IOException;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,7 +8,6 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import androidx.exifinterface.media.ExifInterface;
 import android.util.Log;
-import java.io.IOException;
 
 /** This class outputs the correct sized image of the task when the user clicks on it. Image
  *  dimensions are scaled here to fit new dialog which shows the image.
@@ -16,7 +16,10 @@ import java.io.IOException;
  * @version 2020.05.22
  */
 
-public class PictureUtils {
+public final class PictureUtils {
+
+    private PictureUtils() {}
+
     //read in the dimensions of the image on disk
     public static Bitmap getScaledBitmap(String path, Activity activity) {
         Point size = new Point();

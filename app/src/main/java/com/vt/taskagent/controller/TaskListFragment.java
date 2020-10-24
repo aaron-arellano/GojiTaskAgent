@@ -1,21 +1,22 @@
 package com.vt.taskagent.controller;
 
+import java.util.List;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import java.util.List;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.vt.taskagent.R;
 import com.vt.taskagent.model.Task;
 import com.vt.taskagent.model.TaskLab;
+import com.vt.taskagent.utils.CommonUtils;
 import com.vt.taskagent.utils.TaskItemTouchHelper;
 import com.vt.taskagent.view.TaskAdapter;
 
@@ -56,6 +57,20 @@ public class TaskListFragment extends Fragment {
         new ItemTouchHelper(taskItemTouchHelper).attachToRecyclerView(mTaskRecyclerView);
         return view;
     }
+
+    // override to handle case of non saved task when app is swipe closed
+    @Override
+    public void onStart() {
+        super.onStart();
+        // delete the erroneous task created if title is empty
+        for (Task t : mTaskAdapter.getTasks()) {
+            if (CommonUtils.isNullOrEmpty(t.getTitle())) {
+                TaskLab.getInstance(getActivity()).deleteTask(t);
+                updateUI();
+            }
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
